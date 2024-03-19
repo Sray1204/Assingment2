@@ -1,6 +1,5 @@
 document.getElementById("register-form").addEventListener("submit", function(event) {
-    console.log("form submitted")
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); //prevent the default form submission
 
     
     // Retrieve the values entered by the user
@@ -12,10 +11,22 @@ document.getElementById("register-form").addEventListener("submit", function(eve
     if (username.trim() === '' || password.trim() === '') {
         alert('Missing fields please do not leave empty.');
         return;
-    }
-    
-    //read json and check if email has been in use
-    alert('Register successful!');
+    } 
+
+    const fs = require('fs');
+    //read json and check if username has been in use
+    const data = fs.readFileSync('users.json');
+    jsonData.users.push({
+        username: username,
+        password: password
+    })
+    //write user details into json file 
+    const jsonData = JSON.parse(data);
+
+
+    //username is not in use 
+    alert('Register successful! Please sign-in.');
+    window.location.assign("sign-in.html");
     console.log(username, password)
 
     
