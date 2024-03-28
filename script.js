@@ -13,22 +13,28 @@ document.getElementById("register-form").addEventListener("submit", function(eve
         return;
     } 
 
-    const fs = require('fs');
-    //read json and check if username has been in use
-    const data = fs.readFileSync('users.json');
-    jsonData.users.push({
-        username: username,
-        password: password
-    })
-    //write user details into json file 
-    const jsonData = JSON.parse(data);
-
-
+    //reads json and checks if 
+    regVerification();
+    
     //username is not in use 
     alert('Register successful! Please sign-in.');
     window.location.assign("sign-in.html");
-    console.log(username, password)
+
+    console.log(username, password);
 
     
     //the password verfication is not needed
 });
+
+
+//create new function for read and write 
+function regVerification(){
+   fetch('users.json')
+   .then(response => response.json())
+   .then(data => console.log(data))
+
+   console.log(data.ID)
+
+
+}
+
